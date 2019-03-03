@@ -10,6 +10,36 @@ Cloudlify uses Handlebars for merging the JSON formatted configuration file into
 
 *Currently we have AWS as a provider.*
 
+## Requirements
+
+Depending on the provider, which currently is only AWS, you will need the AWS CLI tools installed.
+
+* AWS CLI tools - https://aws.amazon.com/cli/
+* Amazon account with proper IAM roles/policies to access all the services you are deploying
+* AWS Access Key: IAM > User > Security Credentials > Access Keys ( Create Access Key )
+* AWS CLI Credentials locally - Create a folder under your profile for aws credentials ~/.aws ( MacOS )
+
+## Multiple AWS Profile Examples
+
+~/.aws/config
+```
+[default]
+output = text
+region = us-east-1
+[profile other]
+region = us-west-2
+```
+
+~/.aws/credentials
+```
+[default]
+aws_access_key_id = 
+aws_secret_access_key = 
+[other]
+aws_access_key_id = 
+aws_secret_access_key = 
+```
+
 ## Usage Example
 
 ./app.js
