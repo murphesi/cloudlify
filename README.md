@@ -10,7 +10,7 @@ Cloudlify uses Handlebars for merging the JSON formatted configuration file into
 
 *Currently we have AWS as a provider.*
 
-## Usage
+## Usage Example
 
 ./app.js
 ```
