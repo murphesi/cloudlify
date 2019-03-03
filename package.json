@@ -1,7 +1,7 @@
 {
   "name": "cloudlify",
   "version": "0.0.1",
-  "description": "The cloud infrastructure launcher.",
+  "description": "The simple cloud infrastructure launcher using Handlebars for template processing.",
   "main": "lib/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
