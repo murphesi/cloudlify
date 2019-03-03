@@ -1,0 +1,37 @@
+{
+  "name": "cloudlify",
+  "version": "0.0.1",
+  "description": "The cloud infrastructure launcher.",
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murphesi/cloudlify.git"
+  },
+  "keywords": [
+    "cloud",
+    "infrastructure",
+    "devops",
+    "aws",
+    "cloudformation"
+  ],
+  "author": {
+    "name": "Chris Murphy / murphesi",
+    "email": "chris@mtex.ca",
+    "url": "https://mtex.ca"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/murphesi/cloudlify/issues"
+  },
+  "homepage": "https://github.com/murphesi/cloudlify#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "handlebars": "^4.1.0",
+    "shelljs": "^0.8.3",
+    "winston": "^2.4.4",
+    "yargs": "^13.2.1"
+  }
+}
