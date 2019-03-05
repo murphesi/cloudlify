@@ -2,9 +2,11 @@
 
 The simple cloud infrastructure launcher using Handlebars for template processing.
 
+**NOTE: Stack template examples will be posted shortly!**
+
 ## Help
 
-Use the Cloudlify npm module to compile and execute cloud service provider commands.
+Use the Cloudlify npm module to compile yaml templates and execute cloud service provider commands.
 
 Cloudlify uses Handlebars for merging the JSON formatted configuration file into the final template.
 
@@ -59,19 +61,25 @@ require( 'dotenv' ).config();
 
 class Configuration {
 	constructor() {
-		this.Provider = 'AWS';
-		this.Environment = process.env.ENVIRONMENT || 'development';
-		this.StackName = 'my-stack-prod';
-		this.Region = 'us-east-1';
+		// Required
+		this.Stack = {
+			Name: 'my-stack-prod'
+		};
 
+		// Required
 		this.Build = {
-			Template: 'master'
+			Template: 'master',
+			Environment: process.env.ENVIRONMENT || 'development'
 		};
 		
-		this.AWSCLI = {
-			S3Bucket: `${this.StackName}-deploy`
+		// Required
+		this.Provider = {
+			Name: 'AWS',
+			Region: 'us-east-1',
+			Bucket: `${this.Stack.Name}-deploy`
 		};
 
+		// Custom Template Configurations After Here
 		this.SecurityGroups = {
 			PublicCidr: '0.0.0.0/0'
 		};
@@ -125,6 +133,7 @@ Cloudlify uses the following folders relative to where the package is called.
 
 ## Roadmap
 
+* Full example project with templates
 * Test library
 * Linting
 * Convert to TypeScript
@@ -135,3 +144,8 @@ Cloudlify uses the following folders relative to where the package is called.
 ## Contributions
 
 All contributions welcome! Branch off master and submit a pull request for review.
+
+## History
+
+- 0.0.3 - Refactor AWS commands and configuration structure.
+- 0.0.1 - Initialize!
