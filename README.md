@@ -117,7 +117,7 @@ class Configuration {
 	}
 }
 
-module.exports = Configuration;
+module.exports = new Configuration;
 ```
 
 ## Folders
