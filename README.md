@@ -4,13 +4,17 @@ The simple cloud infrastructure launcher using Handlebars for template processin
 
 **NOTE: Stack template examples will be posted shortly!**
 
-## Help
-
 Use the Cloudlify npm module to compile yaml templates and execute cloud service provider commands.
 
 Cloudlify uses Handlebars for merging the JSON formatted configuration file into the final template.
 
 *Currently we have AWS as a provider.*
+
+## Install
+
+```
+npm install --save cloudlify
+```
 
 ## Requirements
 
@@ -47,7 +51,9 @@ aws_secret_access_key =
 ./app.js
 ```
 const Cloudlify = require( 'cloudlify' ),
-    configuration = require( './config/common' );
+	yaml = require( 'yamljs' );
+	
+var configuration = yaml.load( './config/common.yaml' );
 
 var cloudlify = new Cloudlify( configuration, '{ optional non default aws profile name for aws cli }' );
 
@@ -55,69 +61,57 @@ cloudlify.create();
 ```
 
 ## Configuration Example
-./config/common.js
+./config/common.yaml
 ```
-require( 'dotenv' ).config();
+# AWS Cloud Configuration
+# Required: ./templates/master.yaml ( Handlebars template )
 
-class Configuration {
-	constructor() {
-		// Required
-		this.Stack = {
-			Name: 'my-stack-prod'
-		};
+Stack:
+  Name: my-stack-prod
 
-		// Required
-		this.Build = {
-			Template: 'master',
-			Environment: process.env.ENVIRONMENT || 'development'
-		};
-		
-		// Required
-		this.Provider = {
-			Name: 'AWS',
-			Region: 'us-east-1',
-			Bucket: `${this.Stack.Name}-deploy`
-		};
+Build:
+  Template: master
+  Environment: 'development'
 
-		// Custom Template Configurations After Here
-		this.SecurityGroups = {
-			PublicCidr: '0.0.0.0/0'
-		};
+Provider:
+  Name: AWS
+  Region: us-east-1
+  Bucket: my-deploy-bucket
 
-		this.VPC = {
-			Id: 'vpc-someidhere',
-			SubnetId: 'subnet-someidhere',
-			OpenPorts: [ 80, 443, 22, 3306 ]
-		};
+SecurityGroups:
+  PublicCidr: 0.0.0.0/0
 
-		this.Host = {
-			ID: 'MyHostID',
-			KeyName: 'myawskey',
-			InstanceType: 't3.micro',
-			ElasticIPAllocationId: 'eipalloc-someidhereifyouhaveone'
-		};
+VPC:
+  Id: vpc-someidhere
+  SubnetId: subnet-someidhere
+  OpenPorts:
+    - 80
+    - 443
+    - 22
+    - 3306
 
-		this.Service = {
-			Name: `${this.StackName}-web-service`,
-			Web: {
-				Image: 'wordpress:latest',
-				Host: 'www.domainname.com'
-			},
-			DB: {
-				Image: 'mariadb:latest'
-			},
-			Proxy: {
-				Image: 'jwilder/nginx-proxy'
-			}
-		};
+Host:
+  ID: MyHostID
+  KeyName: myawskey
+  InstanceType: t3.micro
+  ElasticIPAllocationId: eipalloc-someidhereifyouhaveone
 
-		this.Logs = {
-			RetentionInDays: 1
-		};
-	}
-}
+Service:
+  Name: MyServiceName
+  Containers:
+    - Name: Web
+      Image: wordpress:latest
+      Host: www.domain.com
+    - Name: DB
+      Image: mariadb:latest
+    - Name: Proxy
+      Image: jwilder/nginx-proxy
+    - Name: LetsEncrypt
+      Image: jrcs/letsencrypt-nginx-proxy-companion
 
-module.exports = new Configuration;
+Logs:
+  RetentionInDays: 1
+
 ```
 
 ## Folders
@@ -147,6 +141,7 @@ All contributions welcome! Branch off master and submit a pull request for revie
 
 ## History
 
+- 0.0.5 - Update example to use yaml for configuration. It's just better ;)
 - 0.0.4 - Check if multiple host services are configured when running an updateService command.
 - 0.0.3 - Refactor AWS commands and configuration structure.
 - 0.0.1 - Initialize!
