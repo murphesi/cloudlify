@@ -71,7 +71,7 @@ Stack:
 
 Build:
   Template: master
-  Environment: 'development'
+  Environment: development
 
 Provider:
   Name: AWS
@@ -141,6 +141,7 @@ All contributions welcome! Branch off master and submit a pull request for revie
 
 ## History
 
+- 0.0.6 - Move force update of services to update() function
 - 0.0.5 - Update example to use yaml for configuration. It's just better ;)
 - 0.0.4 - Check if multiple host services are configured when running an updateService command.
 - 0.0.3 - Refactor AWS commands and configuration structure.
