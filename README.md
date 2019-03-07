@@ -147,5 +147,6 @@ All contributions welcome! Branch off master and submit a pull request for revie
 
 ## History
 
+- 0.0.4 - Check if multiple host services are configured when running an updateService command.
 - 0.0.3 - Refactor AWS commands and configuration structure.
 - 0.0.1 - Initialize!

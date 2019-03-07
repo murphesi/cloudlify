@@ -1,6 +1,6 @@
 {
   "name": "cloudlify",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The simple cloud infrastructure launcher using Handlebars for template processing.",
   "main": "lib/main.js",
   "scripts": {
