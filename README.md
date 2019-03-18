@@ -114,6 +114,22 @@ Logs:
 
 ```
 
+## Environment Vars
+
+Environment variables placed in a .env file can be used with the yaml configuration. If you pass a configuration yaml path to Cloudlify it will pre-process it with Handlebars and make ENV.MY_VAR substitutions before loading the it as a JSON object.
+
+.env
+```
+MY_VAR = 1234
+```
+
+./config.yaml
+```
+Service:
+  Name: Testing
+  ID: {{ENV.MY_VAR}}
+```
+
 ## Folders
 
 Cloudlify uses the following folders relative to where the package is called.
@@ -141,6 +157,7 @@ All contributions welcome! Branch off master and submit a pull request for revie
 
 ## History
 
+- 0.0.7 - Allow option to pass a yaml config path to Cloudlify. It will be pre-processed for ENV vars by Handlebars.
 - 0.0.6 - Move force update of services to update() function
 - 0.0.5 - Update example to use yaml for configuration. It's just better ;)
 - 0.0.4 - Check if multiple host services are configured when running an updateService command.
